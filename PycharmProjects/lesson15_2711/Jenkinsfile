@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Dmitri420/lesson15_2711.git'
+                git 'https://github.com/Dmitri420/lesson15_2711.gitgit'
             }
         }
         stage('Install Dependencies') {
