@@ -6,19 +6,27 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Setup Virtual Environment') {
             steps {
-                git 'https://github.com/Dmitri420/lesson15_2711.gitgit'
-            }
-        }
-        stage('Install Dependencies') {
-            steps {
-                sh 'pip install -r requirements.txt'
+                sh '''
+                # Use bash explicitly
+                bash -c "
+                python3 -m venv venv
+                source venv/bin/activate
+                pip install -r requirements.txt
+                "
+                '''
             }
         }
         stage('Run Tests') {
             steps {
-                sh 'pytest tests/test_google.py'
+                sh '''
+                # Use bash explicitly for test execution
+                bash -c "
+                source venv/bin/activate
+                pytest tests/test_google.py
+                "
+                '''
             }
         }
     }
